@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/util/firebaseUtils.dart';
+import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 
 
 class EditPassword extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ichat_pfe/tabs/contacts.dart';
 import 'package:ichat_pfe/tabs/msgpage.dart';
 import 'package:ichat_pfe/tabs/profile.dart';
-import 'package:ichat_pfe/util/firebaseUtils.dart';
+import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 

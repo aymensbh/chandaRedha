@@ -1,8 +1,8 @@
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/entities/message.dart';
-import 'package:ichat_pfe/entities/user.dart';
-import 'package:ichat_pfe/util/firebaseUtils.dart';
+import 'package:ichat_pfe/ClassAbstract/message.dart';
+import 'package:ichat_pfe/ClassAbstract/user.dart';
+import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:ichat_pfe/widgets/messageLayout.dart';
 import 'package:ichat_pfe/widgets/textzone.dart';
 

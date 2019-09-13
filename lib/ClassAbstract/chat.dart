@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:ichat_pfe/entities/user.dart';
-import 'package:ichat_pfe/util/timeUtiles.dart';
+import 'package:ichat_pfe/ClassAbstract/user.dart';
+import 'package:ichat_pfe/utilities/timeUtiles.dart';
 
 class Chat {
   String id;

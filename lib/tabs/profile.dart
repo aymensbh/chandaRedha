@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/entities/user.dart';
-import 'package:ichat_pfe/util/firebaseUtils.dart';
+import 'package:ichat_pfe/ClassAbstract/user.dart';
+import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:ichat_pfe/widgets/editpassword.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
@@ -54,29 +53,26 @@ class _ProfileState extends State<Profile> {
                   Padding(
                     padding: EdgeInsets.all(20),
                   ),
-                  GestureDetector(
-                    onTap: () => _takePicture(ImageSource.gallery),
-                    child: Center(
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 2,
-                          )
-                        ),
-                          child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  child: Text(user.initiales,
-                                      style: TextStyle(
-                                          color: Color(0xff505050),
-                                          fontSize:
-                                              MediaQuery.of(context).size.width /
-                                                  5)),
-                                  radius: MediaQuery.of(context).size.width / 4,
-                                )),
-                    ),
+                  Center(
+                    child: Container(
+                      padding: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2,
+                        )
+                      ),
+                        child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                child: Text(user.initiales,
+                                    style: TextStyle(
+                                        color: Color(0xff505050),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                5)),
+                                radius: MediaQuery.of(context).size.width / 4,
+                              )),
                   ),
                   Padding(
                     padding: EdgeInsets.all(10),
@@ -256,23 +252,4 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Future<void> _takePicture(ImageSource source) async {
-    File image;
-    image = await ImagePicker.pickImage(
-        source: source, maxWidth: 500.0, maxHeight: 500.0);
-    FirebaseUtils()
-        .savePicture(image, FirebaseUtils().storage_users.child(widget.id))
-        .then((string) async {
-      await FirebaseUtils().base_user.child(user.id).update({"imgUrl": string});
-      // Map map = user.toMap();
-      // map["imgUrl"] = string;
-      // FirebaseUtils().addUser(user.id, map);
-      FirebaseUtils().getUser(widget.id).then((onValue) {
-        setState(() {
-          user = onValue;
-        });
-        //  print(user.imgUrl);
-      });
-    });
-  }
 }

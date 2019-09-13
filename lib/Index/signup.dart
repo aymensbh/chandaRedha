@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/util/firebaseUtils.dart';
+import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 
-String _email, _password;
-final formKey = GlobalKey<FormState>();
-void login(BuildContext context) {
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
+String password, email, name;
+
+void signup(BuildContext context) {
   showDialog(
       context: context,
       builder: (ctx) {
@@ -12,7 +13,7 @@ void login(BuildContext context) {
           backgroundColor: Colors.white,
           contentPadding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
           title: Text(
-            "Login",
+            "Signup",
             style: TextStyle(fontFamily: "Baloo", fontSize: 28,color: Colors.black.withOpacity(.6)),
           ),
           children: <Widget>[
@@ -24,7 +25,47 @@ void login(BuildContext context) {
                     margin: EdgeInsets.only(top: 8, bottom: 4),
                     child: TextFormField(
                       onSaved: (input) {
-                        _email = input.trim();
+                        // input[1].toUpperCase();
+                        name = input.trim();
+                      },
+                      validator: (input) {
+                        if (input.isEmpty) return 'Provide a name';
+                      },
+                      cursorColor: Color(0xFF383645),
+                      cursorWidth: 1,
+                      decoration: InputDecoration(
+                        fillColor: Color.fromRGBO(240, 240, 240, .8),
+                        filled: true,
+                        contentPadding: EdgeInsets.only(
+                            top: 10, bottom: 10, left: 12, right: 6),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        hintText: "Name & Lastname",
+                        hintStyle: TextStyle(color: Colors.grey)
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 4),
+                    child: TextFormField(
+                      onSaved: (input) {
+                        email = input.trim();
                       },
                       validator: (input) {
                         if (input.isEmpty) return 'Provide an email';
@@ -62,9 +103,8 @@ void login(BuildContext context) {
                   Container(
                     margin: EdgeInsets.only(bottom: 4),
                     child: TextFormField(
-                      obscureText: true,
                       onSaved: (input) {
-                        _password = input;
+                        password = input;
                       },
                       validator: (input) {
                         if (input.length < 6) return 'Provide 6 characters';
@@ -106,9 +146,9 @@ void login(BuildContext context) {
               elevation: 0,
               textColor: Colors.white,
               color: Color(0xff202020),
-              child: Text("Get Started",),
+              child: Text("Get Started", style: TextStyle(fontFamily: "Baloo")),
               onPressed: () {
-                validate(context);
+                _signup(context);
               },
             ),
           ],
@@ -116,9 +156,8 @@ void login(BuildContext context) {
       });
 }
 
-Future<void> validate(BuildContext context) async {
+Future<void> _signup(BuildContext context) async {
   BuildContext dialogCtx;
-  print("object");
   if (formKey.currentState.validate()) {
     formKey.currentState.save();
     showDialog(
@@ -134,26 +173,26 @@ Future<void> validate(BuildContext context) async {
                 margin: EdgeInsets.only(top: 20, bottom: 20),
                 alignment: Alignment.center,
                 child: CircularProgressIndicator(
-                  strokeWidth: 3,                  
+                  strokeWidth: 3,
                 ),
               )
             ],
           );
         });
-    FirebaseUtils().signIn(_email, _password).then((onValue) {
+
+    FirebaseUtils().signup(email, password, name).then((onValue) {
       Navigator.of(dialogCtx).pop(true);
       Navigator.pop(context);
     }).catchError((onError) {
       Navigator.of(dialogCtx).pop(true);
-      print(onError);
       showDialog(
           context: context,
           builder: (context) {
             return SimpleDialog(
               contentPadding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              title: Text("Login error!"),
+              title: Text("SignUp error!"),
               children: <Widget>[
-                Text("Failed to log you in with these email & password"),
+                Text("Failed to Sign you up with these email & password"),
               ],
             );
           });
