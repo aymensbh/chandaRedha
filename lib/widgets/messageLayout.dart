@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/entities/message.dart';
-import 'package:ichat_pfe/entities/user.dart';
+import 'package:ichat_pfe/ClassAbstract/message.dart';
+import 'package:ichat_pfe/ClassAbstract/user.dart';
 
 class ChatBubble extends StatelessWidget {
   final Message message;

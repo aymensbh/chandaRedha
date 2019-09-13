@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ichat_pfe/screens/authPage.dart';
-import 'package:ichat_pfe/screens/homePage.dart';
+import 'package:ichat_pfe/Ecrans/authPage.dart';
+import 'package:ichat_pfe/Ecrans/homePage.dart';
 import 'package:flutter/services.dart';
 
 void main(List<String> args) {

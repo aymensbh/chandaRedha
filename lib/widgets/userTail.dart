@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/entities/user.dart';
+import 'package:ichat_pfe/ClassAbstract/user.dart';
 import 'package:line_icons/line_icons.dart';
 
 class UserTail extends StatelessWidget {

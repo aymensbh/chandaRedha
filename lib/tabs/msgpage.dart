@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:ichat_pfe/entities/chat.dart';
+import 'package:ichat_pfe/ClassAbstract/chat.dart';
 import 'package:ichat_pfe/tabs/chatPage.dart';
-import 'package:ichat_pfe/util/firebaseUtils.dart';
+import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:ichat_pfe/widgets/messageTail.dart';
 
 class MsgPage extends StatefulWidget {

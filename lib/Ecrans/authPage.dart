@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/pages/login.dart';
-import 'package:ichat_pfe/pages/signup.dart';
+import 'package:ichat_pfe/Index/login.dart';
+import 'package:ichat_pfe/Index/signup.dart';
 
 class AuthPage extends StatefulWidget {
   @override
