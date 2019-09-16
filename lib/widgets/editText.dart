@@ -2,22 +2,22 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 
 
-class TextZone extends StatefulWidget {
+class EditText extends StatefulWidget {
   final User partner;
   final String id;
 
-  const TextZone({Key key, this.partner, this.id}) : super(key: key);
+  const EditText({Key key, this.partner, this.id}) : super(key: key);
 
   @override
-  _TextZoneState createState() => _TextZoneState();
+  _EditTextState createState() => _EditTextState();
 }
 
-class _TextZoneState extends State<TextZone> {
+class _EditTextState extends State<EditText> {
   TextEditingController _textEditingController;
   User me;
 
@@ -25,7 +25,7 @@ class _TextZoneState extends State<TextZone> {
   void initState() {
     _textEditingController = new TextEditingController();
 
-    FirebaseUtils().getUser(widget.id).then((user) {
+    FirebaseBackend().getUser(widget.id).then((user) {
       setState(() {
         me = user;
       });
@@ -74,7 +74,7 @@ class _TextZoneState extends State<TextZone> {
                     alignLabelWithHint: true,
                     contentPadding: EdgeInsets.all(
                         10), //--------------------------------------------
-                    hintText: 'Aa',
+                    hintText: 'Type a message',
                     hintStyle: TextStyle(
                       color: Colors.white.withOpacity(0.6),
                       // fontFamily: 'product'
@@ -115,11 +115,11 @@ class _TextZoneState extends State<TextZone> {
     if (_textEditingController.text != null &&
         _textEditingController.text != "") {
       String text = _textEditingController.text;
-      FirebaseUtils().sendMessage(widget.partner, me, text, null);
+      FirebaseBackend().sendMessage(widget.partner, me, text, null);
       _textEditingController.clear();
       // FocusScope.of(context).requestFocus(new FocusNode());
     } else {
-      print("Texte vide ou null");
+      print("null");
     }
   }
 
@@ -127,11 +127,11 @@ class _TextZoneState extends State<TextZone> {
     File file = await ImagePicker.pickImage(
         source: source, maxWidth: 1000.0, maxHeight: 1000.0);
     String date = new DateTime.now().millisecondsSinceEpoch.toString();
-    FirebaseUtils()
+    FirebaseBackend()
         .savePicture(
-            file, FirebaseUtils().storage_messages.child(widget.id).child(date))
+            file, FirebaseBackend().storage_messages.child(widget.id).child(date))
         .then((string) {
-      FirebaseUtils().sendMessage(widget.partner, me, null, string);
+      FirebaseBackend().sendMessage(widget.partner, me, null, string);
     });
   }
 }

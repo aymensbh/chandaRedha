@@ -2,9 +2,9 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:ichat_pfe/ClassAbstract/message.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
-import 'package:ichat_pfe/widgets/messageLayout.dart';
-import 'package:ichat_pfe/widgets/textzone.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
+import 'package:ichat_pfe/widgets/editText.dart';
+import 'package:ichat_pfe/widgets/messageList.dart';
 
 class ChatPage extends StatefulWidget {
   final String id;
@@ -26,7 +26,7 @@ class _ChatPageState extends State<ChatPage> {
           IconButton(
             icon: Icon(Icons.delete_outline, color: Colors.white),
             onPressed: () async {
-                FirebaseUtils().deleteChat(widget.id, widget.partner.id);
+                FirebaseBackend().deleteChat(widget.id, widget.partner.id);
                 Navigator.pop(context);
             },
           )
@@ -43,9 +43,9 @@ class _ChatPageState extends State<ChatPage> {
             children: <Widget>[
               Flexible(
                 child: FirebaseAnimatedList(
-                  query: FirebaseUtils()
+                  query: FirebaseBackend()
                       .base_message
-                      .child(FirebaseUtils()
+                      .child(FirebaseBackend()
                           .getMessageRef(widget.id, widget.partner.id))
                       .limitToLast(40),
                   reverse: true,
@@ -54,42 +54,13 @@ class _ChatPageState extends State<ChatPage> {
                     Message message = new Message(snapshot);
                     print("from" + snapshot.value["dateString"]);
                     return GestureDetector(
-                      child: ChatBubble(
+                      child: ChatContainer(
                         myid: widget.id,
                         partner: widget.partner,
                         message: message,
                         animation: animation,
                       ),
-                      onLongPress: () {
-                        // showDialog(
-                        //     context: context,
-                        //     builder: (context) => AlertDialog(
-                        //           title: Text("Delete message!"),
-                        //           content: Text("delete this message"),
-                        //           actions: <Widget>[
-                        //             FlatButton(
-                        //               child: Text("Cancel"),
-                        //               onPressed: () => Navigator.pop(context),
-                        //             ),
-                        //             FlatButton(
-                        //                 child: Text("Delete",style: TextStyle(color: Colors.red),),
-                        //                 onPressed: () async {
-                        //                  await FirebaseUtils()
-                        //                       .base_message
-                        //                       .child(FirebaseUtils()
-                        //                           .getMessageRef(widget.id,
-                        //                               widget.partner.id))
-                        //                       .child(snapshot.value["dateString"]).reference().remove().then((onValue){
-                        //                         print("deleted");
-                        //                         Navigator.pop(context);
-                        //                       }).catchError((onError){
-                        //                         print("not deleted");
-                        //                         Navigator.pop(context);
-                        //                       });
-                        //                 }),
-                        //           ],
-                        //         ));
-                      },
+                      onLongPress: () {},
                     );
                   },
                 ),
@@ -98,7 +69,7 @@ class _ChatPageState extends State<ChatPage> {
                 height: 2,
                 color: Color(0xff4e54c8).withOpacity(.2),
               ),
-              new TextZone(
+              new EditText(
                 partner: widget.partner,
                 id: widget.id,
               ),

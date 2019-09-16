@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 import 'package:ichat_pfe/tabs/chatPage.dart';
-import 'package:ichat_pfe/tabs/deff.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:ichat_pfe/widgets/userTail.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:ichat_pfe/widgets/userInfos.dart';
 
 class Contacts extends StatefulWidget {
   final String id;
@@ -22,11 +20,11 @@ class _ContactsState extends State<Contacts> {
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder(
-          future: FirebaseUtils().getUser(widget.id),
+          future: FirebaseBackend().getUser(widget.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return FirebaseAnimatedList(
-                query: FirebaseUtils().base_user,
+                query: FirebaseBackend().base_user,
                 sort: (a, b) => a.value["name"].compareTo(b.value["name"]),
                 itemBuilder: (context, snapshot, animation, index) {
                   User newUser = new User(snapshot);
@@ -34,7 +32,7 @@ class _ContactsState extends State<Contacts> {
                     return Container();
                   else {
                     print(newUser.imgUrl);
-                    return UserTail(
+                    return UserInfos(
                       user: newUser,
                       onTap: () => Navigator.push(
                           context,

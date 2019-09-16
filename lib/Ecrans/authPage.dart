@@ -34,17 +34,6 @@ class _AuthPageState extends State<AuthPage> {
                     children: <Widget>[
                       
                       Image.asset("assets/logo4.png",fit: BoxFit.cover,),
-                      // Text(
-                      //   "Welcome back to iChat!",
-                      //   style: TextStyle(
-                      //       fontSize: 46,
-                      //       color: Colors.white,
-                      //       fontFamily: "Baloo"),
-                      // ),
-                      // Text(
-                      //   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-                      //   style: TextStyle(color: Colors.white54),
-                      // ),
                     ],
                   ),
                 ),
@@ -108,19 +97,5 @@ class _AuthPageState extends State<AuthPage> {
         ),
       ),
     );
-    //  Scaffold(
-    //   body: Container(
-    //       decoration: BoxDecoration(
-    //         gradient: LinearGradient(
-    //             colors: [Color(0xff1CD8D2), Color(0xff93EDC7)],
-    //             begin: Alignment.topLeft,
-    //             end: Alignment.bottomRight),
-    //       ),
-    //       child: PageView(
-    //         // physics: NeverScrollableScrollPhysics(),
-    //         controller: _controller,
-    //         children: <Widget>[Login(), Login()],
-    //       )),
-    // );
   }
 }

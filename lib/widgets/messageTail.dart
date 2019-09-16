@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MessageTail extends StatefulWidget {
@@ -35,50 +34,11 @@ class _MessageTailState extends State<MessageTail> {
           color: Colors.white.withOpacity(.04),
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: ListTile(
-        // onLongPress: () {
-        //   showDialog(
-        //       context: context,
-        //       builder: (context) => AlertDialog(
-        //             title: Text(
-        //               "Delete chat?",
-        //             ),
-        //             actions: <Widget>[
-        //               FlatButton(
-        //                   child: Text("Cancel"),
-        //                   onPressed: () => Navigator.pop(context)),
-        //               FlatButton(
-        //                   child: Text(
-        //                     "Delete",
-        //                     style: TextStyle(color: Colors.red),
-        //                   ),
-        //                   onPressed: () => FirebaseUtils()
-        //                           .deleteChat(widget.chatId,)
-        //                           .then((onValue) {
-        //                         Navigator.pop(context);
-        //                       }).catchError((onError) {
-        //                         showDialog(
-        //                             context: context,
-        //                             builder: (context) => SimpleDialog(
-        //                                   title: Text("Somthig went wrong!"),
-        //                                   children: <Widget>[
-        //                                     Text("Could not delete chat..")
-        //                                   ],
-        //                                 ));
-        //                       })),
-        //             ],
-        //           ));
-        // },
         leading: Container(
-          // decoration: BoxDecoration(
-          //   color: Colors.white.withOpacity(.4),
-          //   borderRadius: BorderRadius.circular(18),
-          // ),
           child: CircleAvatar(
                   backgroundColor: Colors.white,
                   foregroundColor: Color(0xff202020),
                   child: Text(widget.initials),
-                  //  Text(user.initiales,
-                  //     style: TextStyle(color: Color(0xff4e54c8))),
                   maxRadius: 28,
                 )
         ),

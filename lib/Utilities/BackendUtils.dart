@@ -5,7 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
 
-class FirebaseUtils {
+class FirebaseBackend {
   final firebaseAuth = FirebaseAuth.instance;
   static final base = FirebaseDatabase.instance.reference();
   final base_user = base.child("users");
@@ -107,18 +107,18 @@ class FirebaseUtils {
   }
 
   Future<void> deleteChat(String myId, String pId) async {
-    await FirebaseUtils()
+    await FirebaseBackend()
         .base_message
-        .child(FirebaseUtils().getMessageRef(myId, pId))
+        .child(FirebaseBackend().getMessageRef(myId, pId))
         .remove()
         .then((onValue) async {
-      await FirebaseUtils()
+      await FirebaseBackend()
           .base_chat
           .child(myId)
           .child(pId)
           .remove()
           .then((onValue) async {
-        await FirebaseUtils().base_chat.child(pId).child(myId).remove();
+        await FirebaseBackend().base_chat.child(pId).child(myId).remove();
       });
     }).catchError((onError) {
       print(onError);

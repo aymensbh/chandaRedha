@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 
 
 class EditPassword extends StatefulWidget {
@@ -16,10 +16,8 @@ class EditPasswordState extends State<EditPassword> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      // backgroundColor: KColors.secondary,
       title: Text(
         "Reset password",
-        // style: TextStyle(color: KColors.third),
       ),
       content: Container(
         padding: EdgeInsets.all(8),
@@ -35,17 +33,13 @@ class EditPasswordState extends State<EditPassword> {
               }
             },
             cursorWidth: 1,
-            // cursorColor: KColors.fourth,
             style: TextStyle(
-                // color: KColors.third,
                 ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(12),
-              // fillColor: KColors.primary,
               filled: true,
               hintText: 'Aa',
               hintStyle: TextStyle(
-                  // color: KColors.fourth,
                   ),
             ),
           ),
@@ -73,7 +67,7 @@ class EditPasswordState extends State<EditPassword> {
   Future<void> edit() async {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      FirebaseUtils().updatePassword(_password);
+      FirebaseBackend().updatePassword(_password);
       Navigator.pop(context);
     }
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 
 GlobalKey<FormState> formKey = GlobalKey<FormState>();
 String password, email, name;
@@ -14,11 +14,10 @@ void signup(BuildContext context) {
           contentPadding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
           title: Text(
             "Signup",
-            style: TextStyle(fontFamily: "Baloo", fontSize: 28,color: Colors.black.withOpacity(.6)),
+            style: TextStyle( fontSize: 28,color: Colors.black.withOpacity(.6)),
           ),
           children: <Widget>[
             Form(
-              key: formKey,
               child: Column(
                 children: <Widget>[
                   Container(
@@ -180,7 +179,7 @@ Future<void> _signup(BuildContext context) async {
           );
         });
 
-    FirebaseUtils().signup(email, password, name).then((onValue) {
+    FirebaseBackend().signup(email, password, name).then((onValue) {
       Navigator.of(dialogCtx).pop(true);
       Navigator.pop(context);
     }).catchError((onError) {

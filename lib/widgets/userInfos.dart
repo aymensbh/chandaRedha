@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
 import 'package:line_icons/line_icons.dart';
 
-class UserTail extends StatelessWidget {
+class UserInfos extends StatelessWidget {
   final User user;
   final GestureTapCallback onTap;
 
-  const UserTail({Key key, this.user, this.onTap}) : super(key: key);
+  const UserInfos({Key key, this.user, this.onTap}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

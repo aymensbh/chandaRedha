@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:ichat_pfe/ClassAbstract/message.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
 
-class ChatBubble extends StatelessWidget {
+class ChatContainer extends StatelessWidget {
   final Message message;
   final User partner;
   final String myid;
   final Animation animation;
 
-  const ChatBubble(
+  const ChatContainer(
       {Key key, this.message, this.partner, this.myid, this.animation})
       : super(key: key);
 

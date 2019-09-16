@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 import 'package:ichat_pfe/tabs/contacts.dart';
 import 'package:ichat_pfe/tabs/msgpage.dart';
 import 'package:ichat_pfe/tabs/profile.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     _tabController = new TabController(vsync: this, length: 2, initialIndex: 0);
-    FirebaseUtils().myId().then((uid) async {
+    FirebaseBackend().myId().then((uid) async {
       setState(() {
         id = uid;
       });
 
-      await FirebaseUtils().base_user.child(id).update({"isActive": "Active"});
+      await FirebaseBackend().base_user.child(id).update({"isActive": "Active"});
     });
 
     super.initState();
@@ -63,13 +63,6 @@ class _HomePageState extends State<HomePage>
         });
   }
 
-  // @override
-  // void dispose() async {
-  //   _tabController.dispose();
-  //   await FirebaseUtils().base_user.child(id).update({"isActive": ""});
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,16 +73,14 @@ class _HomePageState extends State<HomePage>
             end: Alignment.bottomRight),
       ),
       child: FutureBuilder(
-        future: FirebaseUtils().firebaseAuth.currentUser(),
+        future: FirebaseBackend().firebaseAuth.currentUser(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
               drawer: Profile(id: id),
               resizeToAvoidBottomPadding: true,
-              // backgroundColor: Color(0xff1CD8D2),
               backgroundColor: Colors.transparent,
               appBar: AppBar(
-                // backgroundColor: Color(0xff1CD8D2),
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 title: Text("Tchanda"),
@@ -108,10 +99,6 @@ class _HomePageState extends State<HomePage>
                     Tab(
                       icon: Icon(Icons.people_outline),
                     ),
-                    // Tab(
-                    //   text: "Profile",
-                    //   icon: Icon(LineIcons.user),
-                    // )
                   ],
                 ),
               body: TabBarView(

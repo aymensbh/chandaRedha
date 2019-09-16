@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:ichat_pfe/ClassAbstract/chat.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 import 'package:ichat_pfe/tabs/chatPage.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
 import 'package:ichat_pfe/widgets/messageTail.dart';
 
 class MsgPage extends StatefulWidget {
@@ -20,11 +20,11 @@ class _MsgPageState extends State<MsgPage> {
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder(
-          future: FirebaseUtils().getUser(widget.id),
+          future: FirebaseBackend().getUser(widget.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return FirebaseAnimatedList(
-                query: FirebaseUtils().base_chat.child(widget.id),
+                query: FirebaseBackend().base_chat.child(widget.id),
                 sort: (a, b) =>
                     b.value["dateString"].compareTo(a.value["dateString"]),
                 itemBuilder: (context, snapshot, animation, index) {

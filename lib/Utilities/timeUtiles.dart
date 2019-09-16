@@ -12,9 +12,9 @@ class DateHelper {
     DateFormat format;
 
     if (now.difference(datePost).inDays > 0) {
-      format = new DateFormat.yMMMd("fr_FR");
+      format = new DateFormat.yMMMd("en_US");
     }  else {
-      format  = new DateFormat.Hm("fr_FR");
+      format  = new DateFormat.Hm("en_US");
     }
 
     return format.format(datePost).toString();

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:ichat_pfe/ClassAbstract/user.dart';
-import 'package:ichat_pfe/utilities/firebaseUtils.dart';
+import 'package:ichat_pfe/Utilities/BackendUtils.dart';
 import 'package:ichat_pfe/widgets/editpassword.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
@@ -22,7 +22,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    FirebaseUtils().getUser(widget.id).then((onValue) {
+    FirebaseBackend().getUser(widget.id).then((onValue) {
       setState(() {
         user = onValue;
       });
@@ -44,7 +44,7 @@ class _ProfileState extends State<Profile> {
         // resizeToAvoidBottomInset: false,
         // resizeToAvoidBottomPadding: false,
         body: FutureBuilder(
-          future: FirebaseUtils().getUser(widget.id),
+          future: FirebaseBackend().getUser(widget.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return ListView(
@@ -162,7 +162,7 @@ class _ProfileState extends State<Profile> {
                                           "Delete",
                                           style: TextStyle(color: Colors.red),
                                         ),
-                                        onPressed: () => FirebaseUtils()
+                                        onPressed: () => FirebaseBackend()
                                                 .deleteUser(widget.id)
                                                 .then((onValue) {
                                               Navigator.pop(context);
@@ -208,7 +208,7 @@ class _ProfileState extends State<Profile> {
                   Container(
                     child: ListTile(
                       onTap: () {
-                        FirebaseUtils().logOut();
+                        FirebaseBackend().logOut();
                       },
                       leading: CircleAvatar(
                         backgroundColor: Color(0xff505050),
